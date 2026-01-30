@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit Tiles & Granites</title>
+
+<style>
+/* ===== RESET & BASE ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth; /* NEW: Smooth scrolling for nav links */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+header{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:70px;
+    background:#000; 
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 40px;
+    z-index:1000;
+}
+
+.logo img{
+    height:60px; 
+}
+
+/* Updated Nav for Mobile Support */
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration:none;
+    font-size:16px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ffcc00; /* Subtle hover effect */
+}
+
+/* Hamburger Menu (Hidden by default) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+}
+
+/* ===== MAIN CONTENT WRAPPER ===== */
+.main-content {
+    margin-top: 70px; /* Starts exactly after the header */
+}
+
+/* ===== SLIDER ===== */
+.slider{
+    width:100%;
+    height: calc(100vh - 70px); 
+    overflow:hidden;
+    position: relative;
+}
+
+.slides{
+    display:flex;
+    height:100%;
+    transition:transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide{
+    min-width:100%;
+    height: 100%;
+    position:relative;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.slide::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+}
+
+/* ===== TEXT BOX ===== */
+.text-box{
+    position:absolute;
+    top: 45%; 
+    left: 8%;
+    transform: translateY(-50%);
+    color: #fff;
+    width: 85%;
+    max-width: 1100px;
+    z-index: 20;
+}
+
+.text-box h1{
+    font-size: clamp(34px, 7vw, 64px); 
+    line-height: 1.1;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.text-box p{
+    font-size: clamp(18px, 3vw, 24px);
+    opacity: 0.9;
+}
+
+/* ===== SECTIONS ===== */
+section{
+    padding:80px 6%;
+    text-align:center;
+}
+
+.subtitle{
+    max-width:760px;
+    margin:15px auto 60px;
+    color:#666;
+    font-size:15px;
+}
+
+/* ===== GRIDS ===== */
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.cera-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:40px;
+}
+
+.category-card img,
+.cera-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    padding: 10px; 
+    background: #f4f4f4; 
+    box-sizing: border-box;
+    transition: transform .6s;
+}
+
+.category-card:hover img,
+.cera-card:hover img{
+    transform:scale(1.05);
+}
+
+h3{
+    margin-top:15px;
+    text-align:left;
+    letter-spacing:1px;
+}
+
+/* ===== BRANDS ===== */
+.brand-slider{
+    overflow:hidden;
+    padding:30px 0;
+}
+
+.brand-track{
+    display:flex;
+    width:max-content;
+    animation:scrollBrands 28s linear infinite;
+}
+
+.brand-logo{
+    width:240px;
+    height:100px;
+    margin:0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brand-logo img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+}
+
+@keyframes scrollBrands{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+}
+
+/* ===== MAP ===== */
+.map-container{
+    width:100%;
+    height:400px;
+    margin-top:30px;
+}
+
+.map-container iframe{
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+/* ===== FLOATING BUTTONS ===== */
+.contact-controls {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 2000;
+}
+
+.whatsapp-btn, .call-btn {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+}
+
+.whatsapp-btn:hover, .call-btn:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-btn { background: #25D366; }
+.call-btn { background: #007bff; }
+
+.whatsapp-btn img, .call-btn img {
+    width: 30px;
+}
+
+.status-badge {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #fff;
+    z-index: 2000;
+}
+.open{ background:#28a745; }
+.closed{ background:#dc3545; }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media(max-width:992px){
+    .category-grid,.cera-grid{ grid-template-columns:1fr; }
+    
+    .menu-toggle { display: flex; }
+    
+    nav ul {
+        position: absolute;
+        top: 70px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: #000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
+    }
+
+    nav ul.active { right: 0; }
+    
+    .text-box{ left: 5%; width: 90%; top: 40%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+    
+    <nav>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul id="nav-list">
+            <li><a onclick="scrollToSection('about')">About Us</a></li>
+            <li><a onclick="scrollToSection('products')">Products</a></li>
+            <li><a onclick="scrollToSection('contact')">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="main-content">
+    <div class="slider">
+        <div class="slides" id="slides">
+            <div class="slide" data-title="Luxury Kitchen" data-desc="Crafted with style and durability">
+                <img src="SI 1.png">
+                <div class="text-box"><h1></h1><p></p></div>
+            </div>
+            <div class="slide" data-title="Premium Tiles" data-desc="Elegant designs for modern spaces">
+                <img src="SI 2.png">
+                <div class="text-box"><h1></h1><p></p></div>
+            </div>
+            <div class="slide" data-title="CERA Toilet" data-desc="World-class sanitaryware & fittings">
+                <img src="SI 3.png">
+                <div class="text-box"><h1></h1><p></p></div>
+            </div>
+            <div class="slide" data-title="CERA Basins" data-desc="World-class sanitaryware & fittings">
+                <img src="SI 4.png">
+                <div class="text-box"><h1></h1><p></p></div>
+            </div>
+        </div>
+    </div>
+
+    <section id="products">
+        <h2>Find Tiles by Category</h2>
+        <p class="subtitle">Kajaria offers premium wall and floor tiles combining technology with elegant designs.</p>
+        <div class="category-grid">
+            <div class="category-card"><img src="C 11.png"><h3>BATHROOM</h3></div>
+            <div class="category-card"><img src="C 12.png"><h3>KITCHEN</h3></div>
+            <div class="category-card"><img src="C 13.png"><h3>LIVING ROOM</h3></div>
+        </div>
+    </section>
+
+    <section style="background:#fafafa">
+        <h2>Find CERA Products by Category</h2>
+        <p class="subtitle">World-class sanitaryware & bathroom fittings.</p>
+        <div class="cera-grid">
+            <div class="cera-card"><img src="C 21.png"><h3>SANITARYWARE</h3></div>
+            <div class="cera-card"><img src="C 22.png"><h3>FAUCETS</h3></div>
+        </div>
+    </section>
+
+    <section id="about">
+    <h2>Brands We Cater</h2>
+    <div class="brand-slider">
+        <div class="brand-track">
+            <div class="brand-logo"><img src="L 1.png"></div>
+            <div class="brand-logo"><img src="L 2.png"></div>
+            <div class="brand-logo"><img src="L 3.png"></div>
+            <div class="brand-logo"><img src="L 4.png"></div>
+            <div class="brand-logo"><img src="L 1.png"></div>
+            <div class="brand-logo"><img src="L 2.png"></div>
+            <div class="brand-logo"><img src="L 3.png"></div>
+            <div class="brand-logo"><img src="L 4.png"></div>
+        </div>
+    </div>
+    </section>
+
+    <section id="contact" style="background:#f9f9f9">
+        <h2>Visit Our Showroom</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps?q=Mohit+Tiles+%26+Granites,+Shalimar+Garden,+Ghaziabad&output=embed"></iframe>
+        </div>
+        <div class="hours"><h1>Open Everyday • 10:00 AM – 8:00 PM</h1></div>
+    </section>
+</main>
+
+<div class="contact-controls">
+    <a class="call-btn" href="tel:+919818697434">
+        <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Call">
+    </a>
+    <a class="whatsapp-btn" href="https://wa.me/919818697434" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+</div>
+
+<div id="statusBadge" class="status-badge"></div>
+
+<script>
+const slides=document.querySelectorAll(".slide");
+const slider=document.getElementById("slides");
+const menuToggle = document.getElementById('mobile-menu');
+const navList = document.getElementById('nav-list');
+
+let index=0,typingTitle,typingDesc;
+
+// Mobile Menu Toggle
+menuToggle.addEventListener('click', () => {
+    navList.classList.toggle('active');
+});
+
+// Smooth Scroll Function
+function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if(el) {
+        window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
+        navList.classList.remove('active');
+    }
+}
+
+function typeText(el,text,speed=50,callback){
+    el.textContent="";
+    let i=0;
+    const interval=setInterval(()=>{
+        if(i<text.length) el.textContent+=text.charAt(i++);
+        else { clearInterval(interval); if(callback) callback(); }
+    },speed);
+    return interval;
+}
+
+function showSlide(i){
+    slider.style.transform=`translateX(${-i*100}%)`;
+    const s=slides[i];
+    const h1 = s.querySelector("h1"), p = s.querySelector("p");
+    
+    clearInterval(typingTitle); clearInterval(typingDesc);
+    h1.textContent = ""; p.textContent = "";
+
+    typingTitle = typeText(h1, s.dataset.title, 60, () => {
+        typingDesc = typeText(p, s.dataset.desc, 35);
+    });
+}
+
+setInterval(()=>{ index=(index+1)%slides.length; showSlide(index); },5000);
+showSlide(0);
+
+function updateStatus(){
+    const b=document.getElementById("statusBadge");
+    const h=new Date().getHours();
+    if(h>=10&&h<20){
+        b.textContent="OPEN NOW"; b.className="status-badge open";
+    } else {
+        b.textContent="CLOSED NOW"; b.className="status-badge closed";
+    }
+}
+updateStatus();
+setInterval(updateStatus,60000);
+</script>
+
+</body>
+</html>
