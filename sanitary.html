@@ -1,126 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanitary Ware Collection | Mohit Tiles</title>
-    <style>
-        /* Base Styling */
-        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; scroll-behavior: smooth; }
-        body { background: #fff; position: relative; }
-        header { height:70px; background:#000; display:flex; align-items:center; padding:0 40px; color:#fff; position:fixed; top:0; width:100%; z-index:100; }
-        .back-btn { color:#ffcc00; text-decoration:none; font-size:14px; margin-right:20px; font-weight:bold; }
-        
-        /* Hero Section */
-        .hero-sub { height:350px; margin-top:70px; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('SW 7 ST.png') no-repeat center center/cover; display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; }
-        .hero-sub h1 { font-size:48px; letter-spacing:4px; text-transform:uppercase; font-weight: 700; }
-
-        /* Brand Navigation */
-        .brand-nav { padding: 60px 6%; background: #fdfdfd; text-align: center; border-bottom: 1px solid #eee; }
-        .brand-logos { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; }
-        .brand-link { text-decoration: none; color: #333; transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 15px; cursor: pointer; }
-        .brand-link img { width: 260px; height: 120px; object-fit: contain; background: #fff; padding: 15px; border: 2px solid #eee; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .brand-link:hover { transform: scale(1.05); }
-
-        /* Store Sections */
-        .store-section { padding: 80px 6%; display: none; opacity: 0; transition: opacity 0.5s ease-in; }
-        .store-section.active { display: block; opacity: 1; }
-        .store-header { border-left: 5px solid #ffcc00; padding-left: 20px; margin-bottom: 40px; text-align: left; }
-        .product-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:40px; }
-        
-        /* Item Cards */
-        .item-card { background:#fff; border:1px solid #eee; transition:0.4s; text-align: center; padding-bottom: 25px; }
-        .item-card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.1); border-color: #ffcc00; }
-        .img-box { width:100%; height:300px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; overflow: hidden; }
-        .img-box img { width: 100%; height: 100%; object-fit: contain; }
-        
-        .item-info { padding:20px 15px; }
-        .item-info h3 { font-size:18px; margin-bottom:12px; color:#111; text-transform: uppercase; height: 45px; overflow: hidden; }
-        .price-container { display: flex; flex-direction: column; gap: 5px; align-items: center; }
-        .mrp { font-size: 16px; color: #888; text-decoration: line-through; }
-        .discount-price { font-size: 24px; color: #000; font-weight: bold; }
-        .discount-tag { font-size: 14px; color: #d00000; font-weight: bold; }
-
-        .btn-wa { display:inline-block; margin-top:20px; padding:10px 25px; background:#000; color:#fff; text-decoration:none; font-size:13px; font-weight:bold; transition: 0.3s; }
-        .btn-wa:hover { background: #ffcc00; color: #000; }
-        
-        #backToTop { position: fixed; bottom: 100px; right: 25px; width: 50px; height: 50px; background: #000; color: #fff; border: 2px solid #ffcc00; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 2000; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="back-btn">← HOME</a>
-        <h3>SANITARYWARE</h3>
-    </header>
-
-    <div class="hero-sub">
-        <h1>SANITARYWARE</h1>
-    </div>
-
-    <div class="brand-nav">
-        <h2>SHOP BY BRAND</h2>
-        <div class="brand-logos">
-            <div onclick="openStore('somany-store')" class="brand-link">
-                <img src="L 4.png" alt="Somany">
-                <span>Somany Store</span>
-            </div>
-            <div onclick="openStore('cera-store')" class="brand-link">
-                <img src="L 1.png" alt="Cera">
-                <span>Cera Store</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="store-section" id="somany-store">
-        <div class="store-header">
-            <h2>Somany Store</h2>
-            <p>Premium Italian-inspired sanitary solutions</p>
-        </div>
-        <div class="product-grid">
-            <div class="item-card"><div class="img-box"><img src="SS 1.png"></div><div class="item-info"><h3>Somany Tango Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹10,690</span><span class="discount-price">Offer: ₹8,020</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Tango%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 2.png"></div><div class="item-info"><h3>Somany Rambo Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹11,490</span><span class="discount-price">Offer: ₹8,620</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Rambo%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 3.png"></div><div class="item-info"><h3>Somany Nexo Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹11,990</span><span class="discount-price">Offer: ₹9,000</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Nexo%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 4.png"></div><div class="item-info"><h3>Somany Peezo Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹13,490</span><span class="discount-price">Offer: ₹10,100</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Peezo%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 5.png"></div><div class="item-info"><h3>Somany Jupiter Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹12,590</span><span class="discount-price">Offer: ₹9,400</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Jupiter%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 6.png"></div><div class="item-info"><h3>Somany Keats Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹12,990</span><span class="discount-price">Offer: ₹9,740</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Keats%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 7.png"></div><div class="item-info"><h3>Somany Marina Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹14,490</span><span class="discount-price">Offer: ₹10,860</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Marina%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 8.png"></div><div class="item-info"><h3>Somany Denise Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹20,990</span><span class="discount-price">Offer: ₹15,740</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Denise%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 9.png"></div><div class="item-info"><h3>Somany Tango(With Jet) Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹13,990</span><span class="discount-price">Offer: ₹10,490</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Tango(With%20Jet)%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 10.png"></div><div class="item-info"><h3>Somany Optimus Neo Rimless</h3><div class="price-container"><span class="mrp">MRP: ₹12,590</span><span class="discount-price">Offer: ₹9,440</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Optimus%20Neo%20Rimless%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 11.png"></div><div class="item-info"><h3>Somany Sandy Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹11,490</span><span class="discount-price">Offer: ₹8,610</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Sandy%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SS 12.png"></div><div class="item-info"><h3>Somany Optimus Classique Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹12,990</span><span class="discount-price">Offer: ₹9,740</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Optimus%20Classique%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-        </div>
-    </div>
-
-    <div class="store-section" id="cera-store">
-        <div class="store-header">
-            <h2>Cera Store</h2>
-            <p>Explore the world-class range of Cera fixtures</p>
-        </div>
-        <div class="product-grid">
-            <div class="item-card"><div class="img-box"><img src="SW 1 TS.png"></div><div class="item-info"><h3>CERA Carnival White Seat</h3><div class="price-container"><span class="mrp">MRP: ₹14,500</span><span class="discount-price">Offer: ₹10,875</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20Carnival%20White%20Seat%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SW 2 T.png"></div><div class="item-info"><h3>CERA Faucet Single Lever Mixer</h3><div class="price-container"><span class="mrp">MRP: ₹9,640</span><span class="discount-price">Offer: ₹7,000</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20Faucet%20Single%20Lever%20Mixer%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SW 3 BT.png"></div><div class="item-info"><h3>CERA French Gold</h3><div class="price-container"><span class="mrp">MRP: ₹13,940</span><span class="discount-price">Offer: ₹10,470</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20French%20Gold%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SW 4 MX.png"></div><div class="item-info"><h3>Concealed body Mixer (40mm)</h3><div class="price-container"><span class="mrp">MRP: ₹3,980</span><span class="discount-price">Offer: ₹2,985</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Concealed%20body%20Mixer%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SW 5 CB.png"></div><div class="item-info"><h3>Luxury CERA Vanity Cabinets</h3><div class="price-container"><span class="mrp">MRP: ₹37,000</span><span class="discount-price">Offer: ₹27,750</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Luxury%20CERA%20Vanity%20Cabinets%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-            <div class="item-card"><div class="img-box"><img src="SW 6 SK.png"></div><div class="item-info"><h3>CERA Stainless Sink</h3><div class="price-container"><span class="mrp">MRP: ₹6,000</span><span class="discount-price">Offer: ₹4,500</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20Stainless%20Sink%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
-        </div>
-    </div>
-
-    <div id="backToTop" onclick="scrollToTop()">↑</div>
-
-    <script>
-        function openStore(storeId) {
-            const sections = document.querySelectorAll('.store-section');
-            sections.forEach(section => section.classList.remove('active'));
-            const target = document.getElementById(storeId);
-            target.classList.add('active');
-            window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
-        }
-        const btt = document.getElementById("backToTop");
-        window.onscroll = function() { if (document.documentElement.scrollTop > 400) btt.style.display = "flex"; else btt.style.display = "none"; };
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-    </script>
-</body>
-</html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sanitary Ware Collection | Mohit Tiles</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;scroll-behavior:smooth}body{background:#fff;position:relative}header{height:70px;background:#000;display:flex;align-items:center;padding:0 40px;color:#fff;position:fixed;top:0;width:100%;z-index:100}.back-btn{color:#ffcc00;text-decoration:none;font-size:14px;margin-right:20px;font-weight:700}.hero-sub{height:350px;margin-top:70px;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('SW 7 ST.png') no-repeat center center/cover;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}.hero-sub h1{font-size:48px;letter-spacing:4px;text-transform:uppercase;font-weight:700}.brand-nav{padding:60px 6%;background:#fdfdfd;text-align:center;border-bottom:1px solid #eee}.brand-logos{display:flex;justify-content:center;gap:60px;flex-wrap:wrap}.brand-link{text-decoration:none;color:#333;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:15px;cursor:pointer}.brand-link img{width:260px;height:120px;object-fit:contain;background:#fff;padding:15px;border:2px solid #eee;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,.05)}.brand-link:hover{transform:scale(1.05)}.store-section{padding:80px 6%;display:none;opacity:0;transition:opacity .5s ease-in}.store-section.active{display:block;opacity:1}.store-header{border-left:5px solid #ffcc00;padding-left:20px;margin-bottom:40px;text-align:left}.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px}.item-card{background:#fff;border:1px solid #eee;transition:.4s;text-align:center;padding-bottom:25px}.item-card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,.1);border-color:#ffcc00}.img-box{width:100%;height:300px;background:#f9f9f9;display:flex;align-items:center;justify-content:center;overflow:hidden}.img-box img{width:100%;height:100%;object-fit:contain}.item-info{padding:20px 15px}.item-info h3{font-size:18px;margin-bottom:12px;color:#111;text-transform:uppercase;height:45px;overflow:hidden}.price-container{display:flex;flex-direction:column;gap:5px;align-items:center}.mrp{font-size:16px;color:#888;text-decoration:line-through}.discount-price{font-size:24px;color:#000;font-weight:700}.discount-tag{font-size:14px;color:#d00000;font-weight:700}.btn-wa{display:inline-block;margin-top:20px;padding:10px 25px;background:#000;color:#fff;text-decoration:none;font-size:13px;font-weight:700;transition:.3s}.btn-wa:hover{background:#ffcc00;color:#000}#backToTop{position:fixed;bottom:100px;right:25px;width:50px;height:50px;background:#000;color:#fff;border:2px solid #ffcc00;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:2000}
+</style></head>
+<body><header><a href="index.html" class="back-btn">← HOME</a><h3>SANITARYWARE</h3></header>
+<div class="hero-sub"><h1>SANITARYWARE</h1></div>
+<div class="brand-nav"><h2>SHOP BY BRAND</h2><div class="brand-logos">
+<div onclick="openStore('somany-store')" class="brand-link"><img src="L 4.png" alt="Somany"><span>Somany Store</span></div>
+<div onclick="openStore('cera-store')" class="brand-link"><img src="L 1.png" alt="Cera"><span>Cera Store</span></div>
+</div></div>
+<div class="store-section" id="somany-store"><div class="store-header"><h2>Somany Store</h2><p>Premium Italian-inspired sanitary solutions</p></div><div class="product-grid">
+<div class="item-card"><div class="img-box"><img src="SS 1.png"></div><div class="item-info"><h3>Somany Tango Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹10,690</span><span class="discount-price">Offer: ₹8,020</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Tango%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 2.png"></div><div class="item-info"><h3>Somany Rambo Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹11,490</span><span class="discount-price">Offer: ₹8,620</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Rambo%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 3.png"></div><div class="item-info"><h3>Somany Nexo Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹11,990</span><span class="discount-price">Offer: ₹9,000</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Nexo%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 4.png"></div><div class="item-info"><h3>Somany Peezo Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹13,490</span><span class="discount-price">Offer: ₹10,100</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Peezo%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 5.png"></div><div class="item-info"><h3>Somany Jupiter Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹12,590</span><span class="discount-price">Offer: ₹9,400</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Jupiter%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 6.png"></div><div class="item-info"><h3>Somany Keats Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹12,990</span><span class="discount-price">Offer: ₹9,740</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Keats%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 7.png"></div><div class="item-info"><h3>Somany Marina Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹14,490</span><span class="discount-price">Offer: ₹10,860</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Marina%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 8.png"></div><div class="item-info"><h3>Somany Denise Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹20,990</span><span class="discount-price">Offer: ₹15,740</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Denise%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 9.png"></div><div class="item-info"><h3>Somany Tango(With Jet) Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹13,990</span><span class="discount-price">Offer: ₹10,490</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Tango(With%20Jet)%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 10.png"></div><div class="item-info"><h3>Somany Optimus Neo Rimless</h3><div class="price-container"><span class="mrp">MRP: ₹12,590</span><span class="discount-price">Offer: ₹9,440</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Optimus%20Neo%20Rimless%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 11.png"></div><div class="item-info"><h3>Somany Sandy Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹11,490</span><span class="discount-price">Offer: ₹8,610</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Sandy%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SS 12.png"></div><div class="item-info"><h3>Somany Optimus Classique Toilet</h3><div class="price-container"><span class="mrp">MRP: ₹12,990</span><span class="discount-price">Offer: ₹9,740</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Somany%20Optimus%20Classique%20Toilet%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+</div></div>
+<div class="store-section" id="cera-store"><div class="store-header"><h2>Cera Store</h2><p>Explore the world-class range of Cera fixtures</p></div><div class="product-grid">
+<div class="item-card"><div class="img-box"><img src="SW 1 TS.png"></div><div class="item-info"><h3>CERA Carnival White Seat</h3><div class="price-container"><span class="mrp">MRP: ₹14,500</span><span class="discount-price">Offer: ₹10,875</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20Carnival%20White%20Seat%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SW 2 T.png"></div><div class="item-info"><h3>CERA Faucet Single Lever Mixer</h3><div class="price-container"><span class="mrp">MRP: ₹9,640</span><span class="discount-price">Offer: ₹7,000</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20Faucet%20Single%20Lever%20Mixer%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SW 3 BT.png"></div><div class="item-info"><h3>CERA French Gold</h3><div class="price-container"><span class="mrp">MRP: ₹13,940</span><span class="discount-price">Offer: ₹10,470</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20French%20Gold%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SW 4 MX.png"></div><div class="item-info"><h3>Concealed body Mixer (40mm)</h3><div class="price-container"><span class="mrp">MRP: ₹3,980</span><span class="discount-price">Offer: ₹2,985</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Concealed%20body%20Mixer%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SW 5 CB.png"></div><div class="item-info"><h3>Luxury CERA Vanity Cabinets</h3><div class="price-container"><span class="mrp">MRP: ₹37,000</span><span class="discount-price">Offer: ₹27,750</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Luxury%20CERA%20Vanity%20Cabinets%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="SW 6 SK.png"></div><div class="item-info"><h3>CERA Stainless Sink</h3><div class="price-container"><span class="mrp">MRP: ₹6,000</span><span class="discount-price">Offer: ₹4,500</span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20CERA%20Stainless%20Sink%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+</div></div>
+<div id="backToTop" onclick="scrollToTop()">↑</div>
+<script>
+function openStore(e){const t=document.querySelectorAll(".store-section");t.forEach(e=>e.classList.remove("active"));const o=document.getElementById(e);o.classList.add("active"),window.scrollTo({top:o.offsetTop-80,behavior:"smooth"})}const btt=document.getElementById("backToTop");window.onscroll=function(){document.documentElement.scrollTop>400?btt.style.display="flex":btt.style.display="none"};function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"})}
+</script></body></html>
