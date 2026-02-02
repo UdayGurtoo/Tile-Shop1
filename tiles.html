@@ -1,159 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiles & Marbles Collection | Mohit Tiles</title>
-    <style>
-        /* ===== RESET & BASE ===== */
-        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; scroll-behavior: smooth; }
-        body { background: #fff; }
-        
-        header { 
-            height:70px; background:#000; display:flex; align-items:center; 
-            padding:0 40px; color:#fff; position:fixed; top:0; width:100%; z-index:100; 
-        }
-        
-        .back-btn { color:#ffcc00; text-decoration:none; font-size:14px; margin-right:20px; font-weight:bold; }
-
-        /* ===== HERO SECTION ===== */
-        .hero-sub { 
-            height:350px; margin-top:70px;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('T 7 ST.png') no-repeat center center/cover;
-            display:flex; align-items:center; justify-content:center; color:#fff; text-align:center; 
-        }
-        .hero-sub h1 { font-size:48px; letter-spacing:4px; text-transform:uppercase; font-weight: 700; }
-
-        /* ===== PRODUCT GRID ===== */
-        .container { padding:60px 6%; }
-        .product-grid { 
-            display:grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap:40px; 
-        }
-        
-        .item-card { 
-            background:#fff; border:1px solid #eee; transition:0.4s; text-align: center; padding-bottom: 25px; 
-        }
-        .item-card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.1); border-color: #ffcc00; }
-
-        .img-box { 
-            width:100%; height:350px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; overflow: hidden; 
-        }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .item-info { padding:20px 15px; }
-        .item-info h3 { font-size:18px; margin-bottom:12px; color:#111; text-transform: uppercase; }
-
-        .price-container { display: flex; flex-direction: column; gap: 5px; align-items: center; }
-        .mrp { font-size: 16px; color: #888; text-decoration: line-through; }
-        .discount-price { font-size: 24px; color: #000; font-weight: bold; }
-        .discount-tag { font-size: 14px; color: #d00000; font-weight: bold; }
-
-        .btn-wa { 
-            display:inline-block; margin-top:20px; padding:10px 25px; background:#000; color:#fff; 
-            text-decoration:none; font-size:13px; font-weight:bold; transition: 0.3s; 
-        }
-        .btn-wa:hover { background: #ffcc00; color: #000; }
-
-        @media(max-width: 768px) {
-            .hero-sub h1 { font-size: 32px; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <a href="index.html" class="back-btn">← HOME</a>
-        <h2>PREMIUM TILES</h2>
-    </header>
-
-    <div class="hero-sub">
-        <h1>Tiles & Marbles</h1>
-    </div>
-
-    <div class="container">
-        <div class="product-grid">
-            
-            <div class="item-card">
-                <div class="img-box"><img src="T 1.png" alt="Statuerio White"></div>
-                <div class="item-info">
-                    <h3>Statuerio White Marble</h3>
-                    <div class="price-container">
-                        <span class="mrp">MRP: ₹600</span>
-                        <span class="discount-price">Offer: ₹450 <small>/sqft</small></span>
-                        <span class="discount-tag">(25% OFF)</span>
-                    </div>
-                    <a href="https://wa.me/919818697434?text=Is%20Statuerio%20White%20Marble%20available?" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="img-box"><img src="T 2.png" alt="Vitrified GVT"></div>
-                <div class="item-info">
-                    <h3>Vitrified GVT (2x4)</h3>
-                    <div class="price-container">
-                        <span class="mrp">MRP: ₹125</span>
-                        <span class="discount-price">Offer: ₹95 <small>/sqft</small></span>
-                        <span class="discount-tag">(24% OFF)</span>
-                    </div>
-                    <a href="https://wa.me/919818697434?text=Is%20Vitrified%20GVT%20(2x4)%20available?" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="img-box"><img src="T 3.png" alt="Italian Grey"></div>
-                <div class="item-info">
-                    <h3>Italian Grey Glossy</h3>
-                    <div class="price-container">
-                        <span class="mrp">MRP: ₹150</span>
-                        <span class="discount-price">Offer: ₹110 <small>/sqft</small></span>
-                        <span class="discount-tag">(26% OFF)</span>
-                    </div>
-                    <a href="https://wa.me/919818697434?text=Is%20Italian%20Grey%20Glossy%20available?" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="img-box"><img src="T 4.png" alt="Exterior Wall"></div>
-                <div class="item-info">
-                    <h3>Exterior Wall Stone</h3>
-                    <div class="price-container">
-                        <span class="mrp">MRP: ₹85</span>
-                        <span class="discount-price">Offer: ₹65 <small>/sqft</small></span>
-                        <span class="discount-tag">(23% OFF)</span>
-                    </div>
-                    <a href="https://wa.me/919818697434?text=Is%20Exterior%20Wall%20Stone%20available?" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="img-box"><img src="T 5.png" alt="Bathroom Concept"></div>
-                <div class="item-info">
-                    <h3>Bathroom Concept Tiles</h3>
-                    <div class="price-container">
-                        <span class="mrp">MRP: ₹75</span>
-                        <span class="discount-price">Offer: ₹55 <small>/sqft</small></span>
-                        <span class="discount-tag">(26% OFF)</span>
-                    </div>
-                    <a href="https://wa.me/919818697434?text=Is%20Bathroom%20Concept%20Tiles%20available?" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-
-            <div class="item-card">
-                <div class="img-box"><img src="T 6.png" alt="Wooden Plank"></div>
-                <div class="item-info">
-                    <h3>Wooden Plank Series</h3>
-                    <div class="price-container">
-                        <span class="mrp">MRP: ₹140</span>
-                        <span class="discount-price">Offer: ₹105 <small>/sqft</small></span>
-                        <span class="discount-tag">(25% OFF)</span>
-                    </div>
-                    <a href="https://wa.me/919818697434?text=Is%20Wooden%20Plank%20Series%20available?" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</body>
-</html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiles & Marbles Collection | Mohit Tiles</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;scroll-behavior:smooth}body{background:#fff}header{height:70px;background:#000;display:flex;align-items:center;padding:0 40px;color:#fff;position:fixed;top:0;width:100%;z-index:100}.back-btn{color:#ffcc00;text-decoration:none;font-size:14px;margin-right:20px;font-weight:700}.hero-sub{height:350px;margin-top:70px;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('T 7 ST.png') no-repeat center center/cover;display:flex;align-items:center;justify-content:center;color:#fff;text-align:center}.hero-sub h1{font-size:48px;letter-spacing:4px;text-transform:uppercase;font-weight:700}.container{padding:60px 6%}.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px}.item-card{background:#fff;border:1px solid #eee;transition:.4s;text-align:center;padding-bottom:25px}.item-card:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,.1);border-color:#ffcc00}.img-box{width:100%;height:350px;background:#f9f9f9;display:flex;align-items:center;justify-content:center;overflow:hidden}.img-box img{width:100%;height:100%;object-fit:cover}.item-info{padding:20px 15px}.item-info h3{font-size:18px;margin-bottom:12px;color:#111;text-transform:uppercase}.price-container{display:flex;flex-direction:column;gap:5px;align-items:center}.mrp{font-size:16px;color:#888;text-decoration:line-through}.discount-price{font-size:24px;color:#000;font-weight:700}.discount-tag{font-size:14px;color:#d00000;font-weight:700}.btn-wa{display:inline-block;margin-top:20px;padding:10px 25px;background:#000;color:#fff;text-decoration:none;font-size:13px;font-weight:700;transition:.3s}.btn-wa:hover{background:#ffcc00;color:#000}@media(max-width:768px){.hero-sub h1{font-size:32px}}
+</style></head>
+<body><header><a href="index.html" class="back-btn">← HOME</a><h3>PREMIUM TILES</h3></header>
+<div class="hero-sub"><h1>Tiles & Marbles</h1></div>
+<div class="container"><div class="product-grid">
+<div class="item-card"><div class="img-box"><img src="T 1.png" alt="Statuerio White"></div><div class="item-info"><h3>Statuerio White Marble</h3><div class="price-container"><span class="mrp">MRP: ₹600</span><span class="discount-price">Offer: ₹450 <small>/sqft</small></span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Statuerio%20White%20Marble%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="T 2.png" alt="Vitrified GVT"></div><div class="item-info"><h3>Vitrified GVT (2x4)</h3><div class="price-container"><span class="mrp">MRP: ₹125</span><span class="discount-price">Offer: ₹95 <small>/sqft</small></span><span class="discount-tag">(24% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Vitrified%20GVT%20(2x4)%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="T 3.png" alt="Italian Grey"></div><div class="item-info"><h3>Italian Grey Glossy</h3><div class="price-container"><span class="mrp">MRP: ₹150</span><span class="discount-price">Offer: ₹110 <small>/sqft</small></span><span class="discount-tag">(26% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Italian%20Grey%20Glossy%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="T 4.png" alt="Exterior Wall"></div><div class="item-info"><h3>Exterior Wall Stone</h3><div class="price-container"><span class="mrp">MRP: ₹85</span><span class="discount-price">Offer: ₹65 <small>/sqft</small></span><span class="discount-tag">(23% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Exterior%20Wall%20Stone%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="T 5.png" alt="Bathroom Concept"></div><div class="item-info"><h3>Bathroom Concept Tiles</h3><div class="price-container"><span class="mrp">MRP: ₹75</span><span class="discount-price">Offer: ₹55 <small>/sqft</small></span><span class="discount-tag">(26% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Bathroom%20Concept%20Tiles%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+<div class="item-card"><div class="img-box"><img src="T 6.png" alt="Wooden Plank"></div><div class="item-info"><h3>Wooden Plank Series</h3><div class="price-container"><span class="mrp">MRP: ₹140</span><span class="discount-price">Offer: ₹105 <small>/sqft</small></span><span class="discount-tag">(25% OFF)</span></div><a href="https://wa.me/919818697434?text=Is%20Wooden%20Plank%20Series%20available?" class="btn-wa">ENQUIRE NOW</a></div></div>
+</div></div></body></html>
