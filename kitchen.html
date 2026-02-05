@@ -10,5 +10,12 @@
 <div class="hero-sub"><h1>Premium Kitchen Inspiration</h1></div>
 <div class="gallery-container"><div class="kitchen-grid" id="kitchenGallery"></div></div>
 <script>
-const gallery=document.getElementById('kitchenGallery');for(let i=1;i<=40;i++){const box=document.createElement('div');box.className='kitchen-box';const img=document.createElement('img');img.src=`O-${i}.PNG`;img.alt=`Kitchen Design ${i}`;img.onerror=function(){this.parentElement.style.display='none'};box.appendChild(img);gallery.appendChild(box)}
+const gallery=document.getElementById('kitchenGallery');
+for(let i=1;i<=40;i++)
+{const box=document.createElement('div');
+box.className='kitchen-box';
+const img=document.createElement('img');
+img.src=`O-${i}.PNG`
+;img.alt=`Kitchen Design ${i}`
+;img.onerror=function(){this.parentElement.style.display='none'};box.appendChild(img);gallery.appendChild(box)}
 </script></body></html>
