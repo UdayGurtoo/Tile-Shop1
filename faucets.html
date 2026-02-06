@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Premium Faucets | Mohit Tiles & Granites</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; scroll-behavior: smooth; }
+        header { height:70px; background:#000; display:flex; align-items:center; padding:0 40px; color:#fff; position:fixed; top:0; width:100%; z-index:100; }
+        .back-btn { color:#ffcc00; text-decoration:none; font-weight:700; font-size: 14px; }
+        
+        /* ===== HERO SECTION WITH BACKGROUND IMAGE ===== */
+        .hero { 
+            height: 300px; 
+            margin-top: 70px; 
+            /* Added background image with a dark overlay for text readability */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('PF.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #fff; 
+            text-align: center; 
+        }
+        .hero h1 { font-size: clamp(24px, 5vw, 42px); letter-spacing: 2px; text-transform: uppercase; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+
+        /* ===== BRAND NAVIGATION ===== */
+        .brand-nav { padding:60px 6%; text-align:center; background:#fafafa; border-bottom: 1px solid #eee; }
+        .brand-nav h2 { margin-bottom: 40px; font-size: 22px; letter-spacing: 1px; }
+        .brand-logos { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+        
+        .brand-link { cursor:pointer; text-align:center; transition:0.3s; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .brand-link img { width: 240px; height: 120px; object-fit: contain; background:#fff; padding:15px; border:1px solid #ddd; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .brand-link p { font-weight: 700; color: #333; text-transform: uppercase; font-size: 14px; }
+        .brand-link:hover { transform:scale(1.05); }
+
+        /* ===== STORE SECTIONS (HIDDEN BY DEFAULT) ===== */
+        .store-section { padding:80px 6%; display:none; opacity: 0; transition: opacity 0.5s ease-in; }
+        .store-section.active { display:block; opacity: 1; }
+        .store-header { border-left: 5px solid #ffcc00; padding-left: 20px; margin-bottom: 40px; text-align: left; }
+
+        /* ===== PRODUCT GRID ===== */
+        .product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:40px; }
+        .item-card { border:1px solid #eee; padding-bottom:25px; text-align:center; transition:0.4s; background: #fff; }
+        .item-card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.1); border-color:#ffcc00; }
+        
+        .img-box { height:300px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; overflow: hidden; }
+        .img-box img { max-height:85%; max-width:85%; object-fit:contain; transition: 0.5s; }
+        
+        .item-info { padding: 20px 15px; }
+        .item-info h3 { font-size:18px; margin-bottom:5px; color:#111; text-transform: uppercase; line-height: 1.2; }
+        .prod-code { font-size: 12px; color: #666; margin-bottom: 12px; display: block; font-weight: bold; }
+        
+        .mrp { text-decoration:line-through; color:#888; font-size:15px; }
+        .offer { color:#000; font-weight:700; font-size:24px; margin: 5px 0; }
+        .tag { color:#d00000; font-weight:700; font-size:14px; }
+        
+        .btn-wa { display:inline-block; margin-top:20px; padding:12px 30px; background:#000; color:#fff; text-decoration:none; font-size:13px; font-weight:700; transition: 0.3s; }
+        .btn-wa:hover { background:#ffcc00; color:#000; }
+
+        @media(max-width: 768px) {
+            .brand-link img { width: 180px; height: 90px; }
+            .hero { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header><a href="index.html" class="back-btn">← BACK TO HOME</a></header>
+
+    <div class="hero"><h1>PREMIUM FAUCETS & FITTINGS</h1></div>
+
+    <div class="brand-nav">
+        <h2>SELECT A BRAND TO VIEW COLLECTION</h2>
+        <div class="brand-logos">
+            <div onclick="openStore('somany-faucets')" class="brand-link"><img src="L 4.png" alt="Somany Logo"><p>Somany Store</p></div>
+            <div onclick="openStore('cera-faucets')" class="brand-link"><img src="L 1.png" alt="Cera Logo"><p>Cera Store</p></div>
+        </div>
+    </div>
+
+    <div class="store-section" id="somany-faucets">
+        <div class="store-header"><h2>Somany Optimus Collection</h2><p>FLAT 30% OFF ON ALL MODELS</p></div>
+        <div class="product-grid" id="somanyGrid"></div>
+    </div>
+
+    <div class="store-section" id="cera-faucets">
+        <div class="store-header"><h2>Cera Faucet Collection</h2><p>FLAT 30% OFF ON ALL FIXTURES</p></div>
+        <div class="product-grid">
+            <div class="item-card">
+                <div class="img-box"><img src="SW 2 T.png"></div>
+                <div class="item-info">
+                    <h3>Single Lever Mixer</h3>
+                    <span class="prod-code">CERA-MIXER-01</span>
+                    <p class="mrp">MRP: ₹9,640</p>
+                    <p class="offer">Offer: ₹6,748</p>
+                    <p class="tag">30% OFF</p>
+                    <a href="https://wa.me/919818697434?text=Enquiry:CeraMixer" class="btn-wa">ENQUIRE NOW</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openStore(id) {
+            const sections = document.querySelectorAll('.store-section');
+            sections.forEach(s => { s.classList.remove('active'); });
+            const target = document.getElementById(id);
+            target.classList.add('active');
+            window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+        }
+
+        const somanyProducts = [
+            { name: "Optimus Single Lever Basin Mixer", code: "272111450011", mrp: 3450 },
+            { name: "Optimus Single Lever High Basin Mixer", code: "272111450021", mrp: 4650 },
+            { name: "Optimus Exp. Part For Regular Div.", code: "272151450011", mrp: 1130 },
+            { name: "Optimus Pillar Cock", code: "272211450031", mrp: 1090 },
+            { name: "Optimus Bib Cock", code: "272211450011", mrp: 1010 },
+            { name: "Optimus Long Nose Bib Cock", code: "272211450021", mrp: 1270 },
+            { name: "Optimus Bath Tub Spout", code: "272111450041", mrp: 1380 },
+            { name: "Optimus Sink Mixer Wall Mounted", code: "272201450011", mrp: 3480 },
+            { name: "Optimus Wall Mixer L Bend", code: "272201450041", mrp: 4520 },
+            { name: "Optimus Sink Cock With Swinging Spout WM", code: "272211450091", mrp: 1750 },
+            { name: "Optimus Sink Cock with Round J Spout", code: "272211450161", mrp: 1750 },
+            { name: "Optimus Angular Stop Cock", code: "272211450041", mrp: 720 },
+            { name: "Optimus Two Way Angular Stop Cock", code: "272211450061", mrp: 1570 }
+        ];
+
+        const somanyGrid = document.getElementById('somanyGrid');
+        somanyProducts.forEach((prod, index) => {
+            const offerPrice = Math.round(prod.mrp * 0.7);
+            somanyGrid.innerHTML += `
+                <div class="item-card">
+                    <div class="img-box">
+                        <img src="SF ${index + 1}.png" onerror="this.src='logo.png'">
+                    </div>
+                    <div class="item-info">
+                        <h3>${prod.name}</h3>
+                        <span class="prod-code">${prod.code}</span>
+                        <p class="mrp">MRP: ₹${prod.mrp.toLocaleString()}</p>
+                        <p class="offer">Offer: ₹${offerPrice.toLocaleString()}</p>
+                        <p class="tag">30% OFF</p>
+                        <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
