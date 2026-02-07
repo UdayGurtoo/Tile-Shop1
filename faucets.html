@@ -9,14 +9,13 @@
         header { height:70px; background:#000; display:flex; align-items:center; padding:0 40px; color:#fff; position:fixed; top:0; width:100%; z-index:100; }
         .back-btn { color:#ffcc00; text-decoration:none; font-weight:700; font-size: 14px; }
         
-        /* ===== HERO SECTION WITH BACKGROUND IMAGE ===== */
+        /* ===== HERO SECTION ===== */
         .hero { 
             height: 300px; 
             margin-top: 70px; 
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('PF.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -45,9 +44,8 @@
         .item-card { border:1px solid #eee; padding-bottom:25px; text-align:center; transition:0.4s; background: #fff; }
         .item-card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.1); border-color:#ffcc00; }
         
-        /* ===== IMAGE HOLDER UPDATED TO FIT BOX ===== */
+        /* ===== IMAGE HOLDER (240px, 100% FIT) ===== */
         .img-box { height:240px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; overflow: hidden; }
-        /* Changed from 85% to 100% width/height so it fills the container */
         .img-box img { width:100%; height:100%; object-fit:contain; transition: 0.5s; }
         
         .item-info { padding: 20px 15px; }
@@ -89,6 +87,9 @@
 
         <h3 style="text-align:left; margin:40px 0 20px 0; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">THISTLE COLLECTION</h3>
         <div class="product-grid" id="somanyThistleGrid"></div>
+
+        <h3 style="text-align:left; margin:40px 0 20px 0; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">STYLO COLLECTION</h3>
+        <div class="product-grid" id="somanyStyloGrid"></div>
     </div>
 
     <div class="store-section" id="cera-faucets">
@@ -148,39 +149,42 @@
             { name: "Thistle Angle Valve", code: "272211140041", mrp: 1360 }
         ];
 
-        const optimusGrid = document.getElementById('somanyOptimusGrid');
-        optimus.forEach((prod, index) => {
-            const offerPrice = Math.round(prod.mrp * 0.7);
-            optimusGrid.innerHTML += `
-                <div class="item-card">
-                    <div class="img-box"><img src="SF ${index + 1}.png" onerror="this.src='logo.png'"></div>
-                    <div class="item-info">
-                        <h3>${prod.name}</h3>
-                        <span class="prod-code">${prod.code}</span>
-                        <p class="mrp">MRP: ₹${prod.mrp.toLocaleString()}</p>
-                        <p class="offer">Offer: ₹${offerPrice.toLocaleString()}</p>
-                        <p class="tag">30% OFF</p>
-                        <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
-                    </div>
-                </div>`;
-        });
+        // 3. Stylo Collection (SFS Pattern)
+        const stylo = [
+            { name: "Stylo Single Lever Basin Mixer", code: "272201520031", mrp: 2720 },
+            { name: "Stylo Extended Pillar Cock", code: "272211520121", mrp: 2260 },
+            { name: "Stylo Pillar Cock", code: "272211520031", mrp: 1020 },
+            { name: "Stylo Exp Part for High/3-inlet Div.", code: "272111520031", mrp: 1420 },
+            { name: "Stylo Bib Cock", code: "272211520011", mrp: 980 },
+            { name: "Stylo Swan Neck with Swinging Spout TM", code: "272211520081", mrp: 1930 },
+            { name: "Stylo Sink Mixer Wall Mounted", code: "272201520011", mrp: 3400 },
+            { name: "Stylo Wall Mixer L Bend", code: "272201520061", mrp: 4350 },
+            { name: "Stylo Two Way Angular Stop Cock", code: "272211520061", mrp: 1320 },
+            { name: "Stylo Angular Stop Cock", code: "272211520041", mrp: 770 }
+        ];
 
-        const thistleGrid = document.getElementById('somanyThistleGrid');
-        thistle.forEach((prod, index) => {
-            const offerPrice = Math.round(prod.mrp * 0.7);
-            thistleGrid.innerHTML += `
-                <div class="item-card">
-                    <div class="img-box"><img src="SFT ${index + 1}.png" onerror="this.src='logo.png'"></div>
-                    <div class="item-info">
-                        <h3>${prod.name}</h3>
-                        <span class="prod-code">${prod.code}</span>
-                        <p class="mrp">MRP: ₹${prod.mrp.toLocaleString()}</p>
-                        <p class="offer">Offer: ₹${offerPrice.toLocaleString()}</p>
-                        <p class="tag">30% OFF</p>
-                        <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
-                    </div>
-                </div>`;
-        });
+        function renderGrid(data, gridId, imgPrefix) {
+            const grid = document.getElementById(gridId);
+            data.forEach((prod, index) => {
+                const offerPrice = Math.round(prod.mrp * 0.7);
+                grid.innerHTML += `
+                    <div class="item-card">
+                        <div class="img-box"><img src="${imgPrefix} ${index + 1}.png" onerror="this.src='logo.png'"></div>
+                        <div class="item-info">
+                            <h3>${prod.name}</h3>
+                            <span class="prod-code">${prod.code}</span>
+                            <p class="mrp">MRP: ₹${prod.mrp.toLocaleString()}</p>
+                            <p class="offer">Offer: ₹${offerPrice.toLocaleString()}</p>
+                            <p class="tag">30% OFF</p>
+                            <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        renderGrid(optimus, 'somanyOptimusGrid', 'SF');
+        renderGrid(thistle, 'somanyThistleGrid', 'SFT');
+        renderGrid(stylo, 'somanyStyloGrid', 'SFS');
     </script>
 </body>
 </html>
