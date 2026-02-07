@@ -23,8 +23,11 @@
         .gallery-container { padding: 40px 10%; min-height: 400px; text-align: center; }
         .kitchen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         
+        /* INCREASED IMAGE SIZE HERE */
         .kitchen-box { 
-            width: 100%; height: 240px; background: #f4f4f4; 
+            width: 100%; 
+            height: 350px; /* Increased from 240px to 350px */
+            background: #f4f4f4; 
             overflow: hidden; border: 1px solid #eee; 
         }
         .kitchen-box img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
@@ -42,7 +45,8 @@
             .gallery-container { padding: 20px 5%; }
             .kitchen-grid { gap: 10px; }
             .hero-sub h1 { font-size: 24px; }
-            .kitchen-box { height: 180px; }
+            /* Adjusted mobile size as well */
+            .kitchen-box { height: 250px; } 
         }
     </style>
 </head>
@@ -72,7 +76,7 @@
         const pagination = document.getElementById('paginationControls');
 
         function loadPage(pageNumber) {
-            gallery.innerHTML = ''; // Clear gallery
+            gallery.innerHTML = '';
             
             const start = (pageNumber - 1) * itemsPerPage + 1;
             const end = pageNumber * itemsPerPage;
@@ -82,17 +86,14 @@
                 box.className = 'kitchen-box';
                 
                 const img = document.createElement('img');
-                // Ensure the path matches your deployment folder structure
                 img.src = `O-${i}.png`; 
                 img.alt = `Kitchen Design ${i}`;
                 
                 img.onload = function() {
-                    // Only show the box once the image has actually loaded
                     box.style.opacity = "1";
                 };
 
                 img.onerror = function() {
-                    // Hide individual missing boxes
                     this.parentElement.style.display = 'none';
                 };
                 
@@ -101,7 +102,6 @@
             }
 
             updatePaginationButtons(pageNumber);
-            // Smooth scroll back to top of gallery on page change
             window.scrollTo({ top: 250, behavior: 'smooth' });
         }
 
@@ -118,7 +118,6 @@
             }
         }
 
-        // Run the initial load
         loadPage(1);
     });
 </script>
