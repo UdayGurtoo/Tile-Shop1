@@ -13,7 +13,6 @@
         .hero { 
             height: 300px; 
             margin-top: 70px; 
-            /* Added background image with a dark overlay for text readability */
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('PF.png');
             background-size: cover;
             background-position: center;
@@ -42,22 +41,24 @@
         .store-header { border-left: 5px solid #ffcc00; padding-left: 20px; margin-bottom: 40px; text-align: left; }
 
         /* ===== PRODUCT GRID ===== */
-        .product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:40px; }
+        .product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:40px; margin-bottom: 60px; }
         .item-card { border:1px solid #eee; padding-bottom:25px; text-align:center; transition:0.4s; background: #fff; }
         .item-card:hover { transform:translateY(-10px); box-shadow:0 15px 30px rgba(0,0,0,0.1); border-color:#ffcc00; }
         
-        .img-box { height:300px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; overflow: hidden; }
-        .img-box img { max-height:85%; max-width:85%; object-fit:contain; transition: 0.5s; }
+        /* ===== IMAGE HOLDER UPDATED TO FIT BOX ===== */
+        .img-box { height:240px; background:#f9f9f9; display:flex; align-items:center; justify-content:center; overflow: hidden; }
+        /* Changed from 85% to 100% width/height so it fills the container */
+        .img-box img { width:100%; height:100%; object-fit:contain; transition: 0.5s; }
         
         .item-info { padding: 20px 15px; }
-        .item-info h3 { font-size:18px; margin-bottom:5px; color:#111; text-transform: uppercase; line-height: 1.2; }
+        .item-info h3 { font-size:16px; margin-bottom:5px; color:#111; text-transform: uppercase; line-height: 1.2; height: 38px; overflow: hidden; }
         .prod-code { font-size: 12px; color: #666; margin-bottom: 12px; display: block; font-weight: bold; }
         
-        .mrp { text-decoration:line-through; color:#888; font-size:15px; }
-        .offer { color:#000; font-weight:700; font-size:24px; margin: 5px 0; }
-        .tag { color:#d00000; font-weight:700; font-size:14px; }
+        .mrp { text-decoration:line-through; color:#888; font-size:14px; }
+        .offer { color:#000; font-weight:700; font-size:22px; margin: 5px 0; }
+        .tag { color:#d00000; font-weight:700; font-size:13px; }
         
-        .btn-wa { display:inline-block; margin-top:20px; padding:12px 30px; background:#000; color:#fff; text-decoration:none; font-size:13px; font-weight:700; transition: 0.3s; }
+        .btn-wa { display:inline-block; margin-top:15px; padding:10px 25px; background:#000; color:#fff; text-decoration:none; font-size:12px; font-weight:700; transition: 0.3s; }
         .btn-wa:hover { background:#ffcc00; color:#000; }
 
         @media(max-width: 768px) {
@@ -81,8 +82,13 @@
     </div>
 
     <div class="store-section" id="somany-faucets">
-        <div class="store-header"><h2>Somany Optimus Collection</h2><p>FLAT 30% OFF ON ALL MODELS</p></div>
-        <div class="product-grid" id="somanyGrid"></div>
+        <div class="store-header"><h2>Somany Store</h2><p>FLAT 30% OFF ON ALL MODELS</p></div>
+        
+        <h3 style="text-align:left; margin-bottom:20px; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">OPTIMUS COLLECTION</h3>
+        <div class="product-grid" id="somanyOptimusGrid"></div>
+
+        <h3 style="text-align:left; margin:40px 0 20px 0; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">THISTLE COLLECTION</h3>
+        <div class="product-grid" id="somanyThistleGrid"></div>
     </div>
 
     <div class="store-section" id="cera-faucets">
@@ -111,7 +117,8 @@
             window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
         }
 
-        const somanyProducts = [
+        // 1. Optimus Collection (SF Pattern)
+        const optimus = [
             { name: "Optimus Single Lever Basin Mixer", code: "272111450011", mrp: 3450 },
             { name: "Optimus Single Lever High Basin Mixer", code: "272111450021", mrp: 4650 },
             { name: "Optimus Exp. Part For Regular Div.", code: "272151450011", mrp: 1130 },
@@ -127,14 +134,26 @@
             { name: "Optimus Two Way Angular Stop Cock", code: "272211450061", mrp: 1570 }
         ];
 
-        const somanyGrid = document.getElementById('somanyGrid');
-        somanyProducts.forEach((prod, index) => {
+        // 2. Thistle Collection (SFT Pattern)
+        const thistle = [
+            { name: "Thistle Single Lever Basin Mixer with Braided Hoses", code: "272111140011", mrp: 5070 },
+            { name: "Thistle Single Lever High Basin Mixer with Braided Hoses", code: "272111140021", mrp: 6480 },
+            { name: "Thistle Exposed Part Kit of 3 Inlet and Hi Flow Diverter", code: "272111140121", mrp: 2480 },
+            { name: "Thistle Pillar Tap", code: "272211140011", mrp: 2260 },
+            { name: "Thistle Wall Mixer with Bend", code: "272201140011", mrp: 7570 },
+            { name: "Thistle Long Nose Bib Tap", code: "272211140031", mrp: 2260 },
+            { name: "Thistle Bath Spout with Wall Flange", code: "272211140141", mrp: 1830 },
+            { name: "Thistle Sink Mixer Wall Mounted", code: "272201140061", mrp: 5400 },
+            { name: "Thistle Sink Cock with Extended Spout", code: "272211140191", mrp: 3230 },
+            { name: "Thistle Angle Valve", code: "272211140041", mrp: 1360 }
+        ];
+
+        const optimusGrid = document.getElementById('somanyOptimusGrid');
+        optimus.forEach((prod, index) => {
             const offerPrice = Math.round(prod.mrp * 0.7);
-            somanyGrid.innerHTML += `
+            optimusGrid.innerHTML += `
                 <div class="item-card">
-                    <div class="img-box">
-                        <img src="SF ${index + 1}.png" onerror="this.src='logo.png'">
-                    </div>
+                    <div class="img-box"><img src="SF ${index + 1}.png" onerror="this.src='logo.png'"></div>
                     <div class="item-info">
                         <h3>${prod.name}</h3>
                         <span class="prod-code">${prod.code}</span>
@@ -143,8 +162,24 @@
                         <p class="tag">30% OFF</p>
                         <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
                     </div>
-                </div>
-            `;
+                </div>`;
+        });
+
+        const thistleGrid = document.getElementById('somanyThistleGrid');
+        thistle.forEach((prod, index) => {
+            const offerPrice = Math.round(prod.mrp * 0.7);
+            thistleGrid.innerHTML += `
+                <div class="item-card">
+                    <div class="img-box"><img src="SFT ${index + 1}.png" onerror="this.src='logo.png'"></div>
+                    <div class="item-info">
+                        <h3>${prod.name}</h3>
+                        <span class="prod-code">${prod.code}</span>
+                        <p class="mrp">MRP: ₹${prod.mrp.toLocaleString()}</p>
+                        <p class="offer">Offer: ₹${offerPrice.toLocaleString()}</p>
+                        <p class="tag">30% OFF</p>
+                        <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
+                    </div>
+                </div>`;
         });
     </script>
 </body>
