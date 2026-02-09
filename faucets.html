@@ -93,20 +93,10 @@
     </div>
 
     <div class="store-section" id="cera-faucets">
-        <div class="store-header"><h2>Cera Faucet Collection</h2><p>FLAT 30% OFF ON ALL FIXTURES</p></div>
-        <div class="product-grid">
-            <div class="item-card">
-                <div class="img-box"><img src="SW 2 T.png"></div>
-                <div class="item-info">
-                    <h3>Single Lever Mixer</h3>
-                    <span class="prod-code">CERA-MIXER-01</span>
-                    <p class="mrp">MRP: ₹9,640</p>
-                    <p class="offer">Offer: ₹6,748</p>
-                    <p class="tag">30% OFF</p>
-                    <a href="https://wa.me/919818697434?text=Enquiry:CeraMixer" class="btn-wa">ENQUIRE NOW</a>
-                </div>
-            </div>
-        </div>
+        <div class="store-header"><h2>Cera Faucet Store</h2><p>FLAT 27% OFF ON CHROMO COLLECTION</p></div>
+        
+        <h3 style="text-align:left; margin-bottom:20px; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">CHROMO COLLECTION</h3>
+        <div class="product-grid" id="ceraChromoGrid"></div>
     </div>
 
     <script>
@@ -118,7 +108,7 @@
             window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
         }
 
-        // 1. Optimus Collection (SF Pattern)
+        // 1. Somany Optimus Collection
         const optimus = [
             { name: "Optimus Single Lever Basin Mixer", code: "272111450011", mrp: 3450 },
             { name: "Optimus Single Lever High Basin Mixer", code: "272111450021", mrp: 4650 },
@@ -135,7 +125,7 @@
             { name: "Optimus Two Way Angular Stop Cock", code: "272211450061", mrp: 1570 }
         ];
 
-        // 2. Thistle Collection (SFT Pattern)
+        // 2. Somany Thistle Collection
         const thistle = [
             { name: "Thistle Single Lever Basin Mixer with Braided Hoses", code: "272111140011", mrp: 5070 },
             { name: "Thistle Single Lever High Basin Mixer with Braided Hoses", code: "272111140021", mrp: 6480 },
@@ -149,7 +139,7 @@
             { name: "Thistle Angle Valve", code: "272211140041", mrp: 1360 }
         ];
 
-        // 3. Stylo Collection (SFS Pattern)
+        // 3. Somany Stylo Collection
         const stylo = [
             { name: "Stylo Single Lever Basin Mixer", code: "272201520031", mrp: 2720 },
             { name: "Stylo Extended Pillar Cock", code: "272211520121", mrp: 2260 },
@@ -163,28 +153,48 @@
             { name: "Stylo Angular Stop Cock", code: "272211520041", mrp: 770 }
         ];
 
-        function renderGrid(data, gridId, imgPrefix) {
+        // 4. Cera Chromo Collection (27% Discount)
+        const chromo = [
+            { name: "Chromo Single lever basin mixer 450 mm", code: "F1019451", mrp: 3650 },
+            { name: "Chromo Pillar cock 305 mm long extended body", code: "F1019102", mrp: 3640 },
+            { name: "Chromo Pillar cock with aerator", code: "F1019101", mrp: 1720 },
+            { name: "Chromo Bib cock with wall flange and aerator", code: "F1019151", mrp: 1590 },
+            { name: "Chromo Push type single lever concealed diverter 40 mm", code: "F1019703", mrp: 4860 },
+            { name: "Chromo Pillar cock with swan neck spout left and aerator", code: "F1019104", mrp: 2390 },
+            { name: "Chromo Sink cock 150 mm swivel spout", code: "F1019301", mrp: 2200 },
+            { name: "Chromo Wall mixer with bend pipe for overhead shower", code: "F1019401", mrp: 5720 },
+            { name: "Chromo Angle cock with wall flange", code: "F1019201", mrp: 1130 },
+            { name: "Chromo 2-Way angle cock with wall flange", code: "F1019211", mrp: 2000 },
+            { name: "Chromo Wall mounted basin spout", code: "F1019653", mrp: 4000 }
+        ];
+
+        function renderGrid(data, gridId, imgPrefix, discount) {
             const grid = document.getElementById(gridId);
             data.forEach((prod, index) => {
-                const offerPrice = Math.round(prod.mrp * 0.7);
+                const offerPrice = Math.round(prod.mrp * (1 - discount));
+                const discountTag = (discount * 100) + "% OFF";
+                // CF images use "CF 1.png" etc while others use "SF 1.png" format
+                const imagePath = `${imgPrefix} ${index + 1}.png`;
+                
                 grid.innerHTML += `
                     <div class="item-card">
-                        <div class="img-box"><img src="${imgPrefix} ${index + 1}.png" onerror="this.src='logo.png'"></div>
+                        <div class="img-box"><img src="${imagePath}" onerror="this.src='logo.png'"></div>
                         <div class="item-info">
                             <h3>${prod.name}</h3>
                             <span class="prod-code">${prod.code}</span>
                             <p class="mrp">MRP: ₹${prod.mrp.toLocaleString()}</p>
                             <p class="offer">Offer: ₹${offerPrice.toLocaleString()}</p>
-                            <p class="tag">30% OFF</p>
+                            <p class="tag">${discountTag}</p>
                             <a href="https://wa.me/919818697434?text=Enquiry:${encodeURIComponent(prod.name)}%20Code:${prod.code}" class="btn-wa">ENQUIRE NOW</a>
                         </div>
                     </div>`;
             });
         }
 
-        renderGrid(optimus, 'somanyOptimusGrid', 'SF');
-        renderGrid(thistle, 'somanyThistleGrid', 'SFT');
-        renderGrid(stylo, 'somanyStyloGrid', 'SFS');
+        renderGrid(optimus, 'somanyOptimusGrid', 'SF', 0.30);
+        renderGrid(thistle, 'somanyThistleGrid', 'SFT', 0.30);
+        renderGrid(stylo, 'somanyStyloGrid', 'SFS', 0.30);
+        renderGrid(chromo, 'ceraChromoGrid', 'CF', 0.27);
     </script>
 </body>
 </html>
