@@ -93,10 +93,13 @@
     </div>
 
     <div class="store-section" id="cera-faucets">
-        <div class="store-header"><h2>Cera Faucet Store</h2><p>FLAT 27% OFF ON CHROMO COLLECTION</p></div>
+        <div class="store-header"><h2>Cera Faucet Store</h2><p>EXCITING OFFERS ON CHROMO & VICTOR COLLECTIONS</p></div>
         
-        <h3 style="text-align:left; margin-bottom:20px; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">CHROMO COLLECTION</h3>
+        <h3 style="text-align:left; margin-bottom:20px; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">CHROMO COLLECTION (27% OFF)</h3>
         <div class="product-grid" id="ceraChromoGrid"></div>
+
+        <h3 style="text-align:left; margin:40px 0 20px 0; color:#666; letter-spacing:1px; border-bottom: 1px solid #eee; padding-bottom: 10px;">VICTOR COLLECTION (27% OFF)</h3>
+        <div class="product-grid" id="ceraVictorGrid"></div>
     </div>
 
     <script>
@@ -153,7 +156,7 @@
             { name: "Stylo Angular Stop Cock", code: "272211520041", mrp: 770 }
         ];
 
-        // 4. Cera Chromo Collection (27% Discount)
+        // 4. Cera Chromo Collection
         const chromo = [
             { name: "Chromo Single lever basin mixer 450 mm", code: "F1019451", mrp: 3650 },
             { name: "Chromo Pillar cock 305 mm long extended body", code: "F1019102", mrp: 3640 },
@@ -168,12 +171,25 @@
             { name: "Chromo Wall mounted basin spout", code: "F1019653", mrp: 4000 }
         ];
 
+        // 5. Cera Victor Collection
+        const victor = [
+            { name: "Victor Basin Mixer", code: "F1015451", mrp: 3100 },
+            { name: "Victor Pillar Cock (11.5” Extended Body)", code: "F1015102", mrp: 3090 },
+            { name: "Victor Pillar Cock", code: "F1015101", mrp: 1465 },
+            { name: "Victor Sink Mixer Wall Mounted", code: "F1015501", mrp: 3310 },
+            { name: "Victor Sink Cock", code: "F1015251", mrp: 1650 },
+            { name: "Victor Wall Mixer (3-in-1)", code: "F1015403", mrp: 5800 },
+            { name: "Victor Wall Mixer with Bend Pipe", code: "F1015401", mrp: 5200 },
+            { name: "Victor Concealed Diverter System", code: "F1015701", mrp: 3690 },
+            { name: "Victor Bath Tub Spout with Wall Flange", code: "F1015661", mrp: 1175 },
+            { name: "Victor Angle Cock", code: "F1015201", mrp: 1000 }
+        ];
+
         function renderGrid(data, gridId, imgPrefix, discount) {
             const grid = document.getElementById(gridId);
             data.forEach((prod, index) => {
                 const offerPrice = Math.round(prod.mrp * (1 - discount));
-                const discountTag = (discount * 100) + "% OFF";
-                // CF images use "CF 1.png" etc while others use "SF 1.png" format
+                const discountTag = (discount * 100).toFixed(0) + "% OFF";
                 const imagePath = `${imgPrefix} ${index + 1}.png`;
                 
                 grid.innerHTML += `
@@ -195,6 +211,7 @@
         renderGrid(thistle, 'somanyThistleGrid', 'SFT', 0.30);
         renderGrid(stylo, 'somanyStyloGrid', 'SFS', 0.30);
         renderGrid(chromo, 'ceraChromoGrid', 'CF', 0.27);
+        renderGrid(victor, 'ceraVictorGrid', 'CF2', 0.27);
     </script>
 </body>
 </html>
