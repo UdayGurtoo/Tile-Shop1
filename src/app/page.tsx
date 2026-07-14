@@ -30,36 +30,68 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+async function fetchHomeData(storeId: string, retries = 3) {
+  try {
+    const banners = await prisma.heroBanner.findMany({
+      where: { storeId, isActive: true },
+      orderBy: { sortOrder: "asc" },
+    });
+    const blocks = await prisma.homepageBlock.findMany({ where: { storeId, isActive: true } });
+    const logos = await prisma.clientLogo.findMany({
+      where: { storeId, isActive: true },
+      orderBy: { sortOrder: "asc" },
+    });
+    const contact = await prisma.contactDetails.findUnique({ where: { storeId } });
+    const categories = await prisma.category.findMany({
+      where: { storeId, isActive: true },
+      orderBy: { sortOrder: "asc" },
+    });
+    const settings = await prisma.siteSetting.findMany({ where: { storeId } });
+    return { banners, blocks, logos, contact, categories, settings };
+  } catch (err) {
+    if (retries > 0) {
+      await new Promise((r) => setTimeout(r, 600));
+      return fetchHomeData(storeId, retries - 1);
+    }
+    throw err;
+  }
+}
+
 export default async function HomePage() {
   let store;
+  let data;
   try {
     store = await getDefaultStore();
+    data = await fetchHomeData(store.id);
   } catch {
     return (
-      <main style={{ padding: 80, textAlign: "center" }}>
-        <h1>Database not configured</h1>
-        <p style={{ marginTop: 16 }}>Set DATABASE_URL and run: npm run db:migrate && npm run db:seed</p>
+      <main style={{ padding: 80, textAlign: "center", fontFamily: "sans-serif" }}>
+        <h1 style={{ fontSize: 24, marginBottom: 12 }}>Connecting to Cloud Database...</h1>
+        <p style={{ color: "#666", marginBottom: 20 }}>
+          If you just added DATABASE_URL on Vercel (`tile-shop3`), the database pool is initializing across regions.
+        </p>
+        <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>
+          Please ensure DATABASE_URL includes `&pgbouncer=true&connect_timeout=30` and click Redeploy in Vercel.
+        </p>
+        <Link
+          href="/"
+          style={{
+            display: "inline-block",
+            padding: "10px 20px",
+            background: "#111",
+            color: "#fff",
+            borderRadius: 6,
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+        >
+          Refresh Page
+        </Link>
       </main>
     );
   }
 
-  const [banners, blocks, logos, contact, categories, settings] = await Promise.all([
-    prisma.heroBanner.findMany({
-      where: { storeId: store.id, isActive: true },
-      orderBy: { sortOrder: "asc" },
-    }),
-    prisma.homepageBlock.findMany({ where: { storeId: store.id, isActive: true } }),
-    prisma.clientLogo.findMany({
-      where: { storeId: store.id, isActive: true },
-      orderBy: { sortOrder: "asc" },
-    }),
-    prisma.contactDetails.findUnique({ where: { storeId: store.id } }),
-    prisma.category.findMany({
-      where: { storeId: store.id, isActive: true },
-      orderBy: { sortOrder: "asc" },
-    }),
-    prisma.siteSetting.findMany({ where: { storeId: store.id } }),
-  ]);
+  const { banners, blocks, logos, contact, categories, settings } = data;
 
   const settingsMap = Object.fromEntries(settings.map((s) => [s.key, s.value]));
   const block = (key: string) => blocks.find((b) => b.key === key);
