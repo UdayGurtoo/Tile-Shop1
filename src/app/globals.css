@@ -28,6 +28,12 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+@media (min-width: 1025px) {
+  body {
+    zoom: 0.8;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
