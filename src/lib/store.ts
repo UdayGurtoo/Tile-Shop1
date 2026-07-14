@@ -2,13 +2,21 @@ import { prisma } from "@/lib/prisma";
 
 const DEFAULT_STORE_SLUG = "mohit-tiles-ghaziabad";
 
-export async function getDefaultStore() {
-  const store =
-    (await prisma.store.findFirst({ where: { isActive: true }, orderBy: { createdAt: "asc" } })) ??
-    (await prisma.store.findUnique({ where: { slug: DEFAULT_STORE_SLUG } }));
+export async function getDefaultStore(retries = 2): Promise<any> {
+  try {
+    const store =
+      (await prisma.store.findFirst({ where: { isActive: true }, orderBy: { createdAt: "asc" } })) ??
+      (await prisma.store.findUnique({ where: { slug: DEFAULT_STORE_SLUG } }));
 
-  if (!store) throw new Error("No store found. Run: npm run db:seed");
-  return store;
+    if (!store) throw new Error("No store found. Run: npm run db:seed");
+    return store;
+  } catch (err) {
+    if (retries > 0) {
+      await new Promise((r) => setTimeout(r, 600));
+      return getDefaultStore(retries - 1);
+    }
+    throw err;
+  }
 }
 
 export async function getStoreId() {
