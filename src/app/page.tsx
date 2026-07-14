@@ -63,16 +63,21 @@ export default async function HomePage() {
   try {
     store = await getDefaultStore();
     data = await fetchHomeData(store.id);
-  } catch {
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : String(err);
     return (
-      <main style={{ padding: 80, textAlign: "center", fontFamily: "sans-serif" }}>
+      <main style={{ padding: 80, textAlign: "center", fontFamily: "sans-serif", maxWidth: 700, margin: "0 auto" }}>
         <h1 style={{ fontSize: 24, marginBottom: 12 }}>Connecting to Cloud Database...</h1>
-        <p style={{ color: "#666", marginBottom: 20 }}>
+        <p style={{ color: "#666", marginBottom: 16 }}>
           If you just added DATABASE_URL on Vercel (`tile-shop3`), the database pool is initializing across regions.
         </p>
-        <p style={{ color: "#888", fontSize: 14, marginBottom: 24 }}>
+        <p style={{ color: "#888", fontSize: 14, marginBottom: 20 }}>
           Please ensure DATABASE_URL includes `&pgbouncer=true&connect_timeout=30` and click Redeploy in Vercel.
         </p>
+        <div style={{ background: "#fff3f3", border: "1px solid #ffcaca", padding: 16, borderRadius: 8, marginBottom: 24, textAlign: "left", fontSize: 13, color: "#b00", wordBreak: "break-all" }}>
+          <strong>Exact Vercel Error:</strong><br />
+          {errorMsg}
+        </div>
         <Link
           href="/"
           style={{
