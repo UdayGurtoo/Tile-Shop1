@@ -34,8 +34,8 @@ async function main() {
     },
   });
 
-  const password = process.env.ADMIN_PASSWORD || "ChangeMe_StrongPassword123!";
-  const email = (process.env.ADMIN_EMAIL || "admin@mohittiles.com").toLowerCase();
+  const password = process.env.ADMIN_PASSWORD || "StrongPassword@123";
+  const email = (process.env.ADMIN_EMAIL || "admin@mohit.com").toLowerCase();
   const passwordHash = await bcrypt.hash(password, 12);
 
   await prisma.user.create({

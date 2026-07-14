@@ -44,8 +44,8 @@ export default function AdminPortalPage() {
         <div>
           <strong style={{ color: "#92400e", fontSize: 14 }}>🔑 Default Login Details:</strong>{" "}
           <span style={{ fontSize: 14, color: "#78350f" }}>
-            Email: <b>admin@mohittiles.com</b> &nbsp;|&nbsp; Password:{" "}
-            <b>ChangeMe_StrongPassword123!</b>
+            Email: <b>admin@mohit.com</b> &nbsp;|&nbsp; Password:{" "}
+            <b>StrongPassword@123</b>
           </span>
         </div>
         <Link
