@@ -8,9 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "upload.wikimedia.org" },
     ],
   },
-  experimental: {
-    optimizePackageImports: ["@prisma/client"],
-  },
+  serverExternalPackages: ["@prisma/client", "prisma"],
 };
 
 export default nextConfig;
