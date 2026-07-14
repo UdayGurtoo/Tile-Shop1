@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/prisma";
+import type { Store } from "@prisma/client";
 
 const DEFAULT_STORE_SLUG = "mohit-tiles-ghaziabad";
 
-export async function getDefaultStore(retries = 2): Promise<any> {
+export async function getDefaultStore(retries = 2): Promise<Store> {
   try {
     const store =
       (await prisma.store.findFirst({ where: { isActive: true }, orderBy: { createdAt: "asc" } })) ??
