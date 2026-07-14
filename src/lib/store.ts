@@ -6,7 +6,7 @@ const DEFAULT_STORE_SLUG = "mohit-tiles-ghaziabad";
 export async function getDefaultStore(retries = 2): Promise<Store> {
   try {
     const store =
-      (await prisma.store.findFirst({ where: { isActive: true }, orderBy: { createdAt: "asc" } })) ??
+      (await prisma.store.findFirst({ where: { isActive: true }, orderBy: { createdAt: "desc" } })) ??
       (await prisma.store.findUnique({ where: { slug: DEFAULT_STORE_SLUG } }));
 
     if (!store) throw new Error("No store found. Run: npm run db:seed");
