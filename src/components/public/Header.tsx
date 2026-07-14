@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 export function Header({
-  logoUrl = "/images/logo.png",
+  logoUrl = "/images/mtg-logo.svg",
   hasPromo = true,
 }: {
   logoUrl?: string;
   hasPromo?: boolean;
 }) {
+  const finalLogo = !logoUrl || logoUrl === "/images/logo.png" ? "/images/mtg-logo.svg" : logoUrl;
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
 
@@ -18,7 +19,7 @@ export function Header({
       <div className="logo">
         <Link href="/">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoUrl} alt="Mohit Tiles & Granites" />
+          <img src={finalLogo} alt="Mohit Tiles & Granites" />
         </Link>
       </div>
       <nav className="site-nav">

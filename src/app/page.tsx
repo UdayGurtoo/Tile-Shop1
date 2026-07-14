@@ -3,9 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
 import { SplashScreen } from "@/components/public/SplashScreen";
 import { Header } from "@/components/public/Header";
+import { Footer } from "@/components/public/Footer";
 import { HeroSlider } from "@/components/public/HeroSlider";
 import { Reveal } from "@/components/public/Reveal";
 import { ContactFloat } from "@/components/public/ContactFloat";
+import { formatTime12h } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -106,7 +108,8 @@ export default async function HomePage() {
   const tileSlugs = ["bathroom-tiles", "kitchen", "living-room"];
   const sanitary = categories.filter((c) => sanitarySlugs.includes(c.slug));
   const tiles = categories.filter((c) => tileSlugs.includes(c.slug));
-  const logoUrl = settingsMap.logo_url || "/images/logo.png";
+  const rawLogo = settingsMap.logo_url || "/images/mtg-logo.svg";
+  const logoUrl = !rawLogo || rawLogo === "/images/logo.png" ? "/images/mtg-logo.svg" : rawLogo;
   const splashTitle = settingsMap.splash_title || "MOHIT TILES AND GRANITES";
 
   return (
@@ -131,7 +134,7 @@ export default async function HomePage() {
               <Link key={c.id} href={`/categories/${c.slug}`} className="category-card">
                 <div className="img-wrap">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.imageUrl || "/images/logo.png"} alt={c.name} loading="lazy" />
+                  <img src={c.imageUrl || "/images/mtg-logo.svg"} alt={c.name} loading="lazy" />
                   <div className="overlay">
                     <span className="shop-btn">SHOP NOW</span>
                   </div>
@@ -153,7 +156,7 @@ export default async function HomePage() {
               >
                 <div className="img-wrap">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.imageUrl || "/images/logo.png"} alt={c.name} loading="lazy" />
+                  <img src={c.imageUrl || "/images/mtg-logo.svg"} alt={c.name} loading="lazy" />
                   <div className="overlay">
                     <span className="shop-btn">SHOP NOW</span>
                   </div>
@@ -193,11 +196,19 @@ export default async function HomePage() {
           ) : null}
           <div style={{ marginTop: 20 }}>
             <h1 style={{ fontSize: 28 }}>
-              Open {contact?.openDays || "Everyday"} • {contact?.openTime || "10:00"} – {contact?.closeTime || "20:00"}
+              Open {contact?.openDays || "Everyday"} • {formatTime12h(contact?.openTime || "10:00")} to {formatTime12h(contact?.closeTime || "20:00")}
             </h1>
           </div>
         </Reveal>
       </main>
+
+      <Footer
+        businessName={contact?.businessName || store.name}
+        phone={contact?.phonePrimary || "+91 98111 22233"}
+        openTime={contact?.openTime || "10:00"}
+        closeTime={contact?.closeTime || "20:00"}
+        openDays={contact?.openDays || "Everyday"}
+      />
 
       {contact ? (
         <ContactFloat

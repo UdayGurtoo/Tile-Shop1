@@ -90,7 +90,7 @@ export default function AdminProductsPage() {
                 <tr key={p.id}>
                   <td>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.images[0]?.thumbnailUrl || p.images[0]?.url || "/images/logo.png"} alt="" width={48} height={48} style={{ objectFit: "cover" }} />
+                    <img src={p.images[0]?.thumbnailUrl || p.images[0]?.url || "/images/mtg-logo.svg"} alt="" width={48} height={48} style={{ objectFit: "cover" }} />
                   </td>
                   <td>{p.name}</td>
                   <td>{p.category?.name || "—"}</td>

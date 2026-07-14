@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 
 export function SplashScreen({
-  logoUrl = "/images/logo.png",
+  logoUrl = "/images/mtg-logo.svg",
   title = "MOHIT TILES AND GRANITES",
 }: {
   logoUrl?: string;
   title?: string;
 }) {
+  const finalLogo = !logoUrl || logoUrl === "/images/logo.png" ? "/images/mtg-logo.svg" : logoUrl;
   const [hidden, setHidden] = useState(false);
   const [filled, setFilled] = useState<boolean[]>(() => Array(100).fill(false));
 
@@ -51,7 +52,7 @@ export function SplashScreen({
       </div>
       <div className="splash-content">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logoUrl} alt="Logo" className="splash-logo" />
+        <img src={finalLogo} alt="Logo" className="splash-logo" />
         <h2>{title}</h2>
       </div>
     </div>

@@ -20,10 +20,27 @@ export function ContactFloat({
     const update = () => {
       const now = new Date();
       const h = now.getHours() + now.getMinutes() / 60;
-      const [oh, om] = openTime.split(":").map(Number);
-      const [ch, cm] = closeTime.split(":").map(Number);
-      const start = oh + (om || 0) / 60;
-      const end = ch + (cm || 0) / 60;
+      const parseHour = (str: string, defaultHour: number) => {
+        if (!str) return defaultHour;
+        const s = str.trim().toLowerCase();
+        let hVal = defaultHour;
+        let mVal = 0;
+        if (s.includes(":")) {
+          const parts = s.split(":");
+          hVal = parseInt(parts[0], 10);
+          mVal = parseInt(parts[1], 10) || 0;
+        } else if (s.length === 4 && !isNaN(Number(s))) {
+          hVal = parseInt(s.slice(0, 2), 10);
+          mVal = parseInt(s.slice(2), 10);
+        } else {
+          hVal = parseInt(s, 10);
+        }
+        if (s.includes("pm") && hVal < 12) hVal += 12;
+        if (s.includes("am") && hVal === 12) hVal = 0;
+        return isNaN(hVal) ? defaultHour : hVal + mVal / 60;
+      };
+      const start = parseHour(openTime, 10);
+      const end = parseHour(closeTime, 20);
       setOpen(h >= start && h < end);
     };
     update();

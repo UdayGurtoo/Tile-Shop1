@@ -14,7 +14,7 @@ export function Footer({ businessName, phone, openTime, closeTime, openDays }: P
       <h3>{businessName}</h3>
       <p>Phone: {phone}</p>
       <p>
-        Timings: {openDays}, {formatTime12h(openTime)} – {formatTime12h(closeTime)}
+        Timings: {openDays}, {formatTime12h(openTime)} to {formatTime12h(closeTime)}
       </p>
       <p style={{ marginTop: 16, fontSize: 12, color: "#888" }}>
         © {new Date().getFullYear()} {businessName}. All rights reserved.

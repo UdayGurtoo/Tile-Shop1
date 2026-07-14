@@ -226,14 +226,14 @@ async function main() {
         "https://www.google.com/maps?q=Mohit+Tiles+%26+Granites,+Shalimar+Garden,+Ghaziabad&output=embed",
       latitude: 28.6895,
       longitude: 77.3397,
-      openTime: "10:00",
-      closeTime: "20:00",
+      openTime: "10:00 AM",
+      closeTime: "8:00 PM",
       openDays: "Everyday",
       aboutTitle: "OUR 40-YEAR LEGACY",
       legacyText:
         "Founded 40 years ago as a specialist in tiles and granites, Mohit Tiles & Granites has grown into Ghaziabad's premier home destination. With 3 modern showrooms and a catalog featuring over 10 global brands.",
       aboutHtml:
-        "<p>Founded <strong>40 years ago</strong> as a specialist in tiles and granites, Mohit Tiles &amp; Granites has grown into Ghaziabad's premier home destination. With <strong>3 modern showrooms</strong> and a catalog featuring over <strong>10 global brands</strong>.</p>",
+        "<h4>Why Choose Mohit Tiles?</h4><ul style='list-style:disc;padding-left:20px;margin-top:10px;'><li><strong>40+ Years of Experience:</strong> Unmatched market knowledge and trust.</li><li><strong>Multi-Brand Showroom:</strong> Direct dealer for Cera, Somany, Jaquar, Kajaria, and import-grade granites.</li><li><strong>Complete Bathroom Solutions:</strong> From pipes & fittings to luxury sanitaryware and modular vanities.</li></ul>",
     },
   });
 
@@ -280,7 +280,7 @@ async function main() {
 
   await prisma.siteSetting.createMany({
     data: [
-      { storeId: store.id, key: "logo_url", value: img("logo.png") },
+      { storeId: store.id, key: "logo_url", value: "/images/mtg-logo.svg" },
       { storeId: store.id, key: "splash_title", value: "MOHIT TILES AND GRANITES" },
       { storeId: store.id, key: "default_og_image", value: img("SI 1.png") },
     ],

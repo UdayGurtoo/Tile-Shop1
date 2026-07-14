@@ -33,7 +33,7 @@ export function ProductCard({
       <Link href={`/products/${slug}`}>
         <div className="img-box">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={imageUrl || "/images/logo.png"} alt={name} loading="lazy" />
+          <img src={imageUrl || "/images/mtg-logo.svg"} alt={name} loading="lazy" />
         </div>
       </Link>
       <div className="item-info">

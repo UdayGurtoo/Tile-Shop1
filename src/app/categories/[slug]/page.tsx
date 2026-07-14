@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
 import { listProducts } from "@/lib/products";
 import { ProductCard } from "@/components/public/ProductCard";
+import { Footer } from "@/components/public/Footer";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }>; searchParams: Promise<{ page?: string; brand?: string; collection?: string }> };
@@ -84,7 +85,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
             {brands.map((b) => (
               <Link key={b.id} href={`/categories/${slug}?brand=${b.slug}`} style={{ textAlign: "center" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={b.logoUrl || "/images/logo.png"} alt={b.name} style={{ width: 180, height: 90, objectFit: "contain", background: "#fff", padding: 10, border: "1px solid #ddd" }} />
+                <img src={b.logoUrl || "/images/mtg-logo.svg"} alt={b.name} style={{ width: 180, height: 90, objectFit: "contain", background: "#fff", padding: 10, border: "1px solid #ddd" }} />
                 <p style={{ marginTop: 10, fontWeight: 700 }}>{b.name}</p>
               </Link>
             ))}
@@ -133,6 +134,13 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           </div>
         ) : null}
       </div>
+      <Footer
+        businessName={contact?.businessName || store.name}
+        phone={contact?.phonePrimary || "+91 98111 22233"}
+        openTime={contact?.openTime || "10:00"}
+        closeTime={contact?.closeTime || "20:00"}
+        openDays={contact?.openDays || "Everyday"}
+      />
     </>
   );
 }
