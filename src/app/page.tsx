@@ -1,103 +1,175 @@
-import Image from "next/image";
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { getDefaultStore } from "@/lib/store";
+import { SplashScreen } from "@/components/public/SplashScreen";
+import { Header } from "@/components/public/Header";
+import { HeroSlider } from "@/components/public/HeroSlider";
+import { Reveal } from "@/components/public/Reveal";
+import { ContactFloat } from "@/components/public/ContactFloat";
+import type { Metadata } from "next";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export const revalidate = 60;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    const store = await getDefaultStore();
+    const seo = await prisma.homepageBlock.findUnique({
+      where: { storeId_key: { storeId: store.id, key: "seo_home" } },
+    });
+    return {
+      title: seo?.title || "Mohit Tiles & Granites | 40 Years of Excellence",
+      description: seo?.subtitle || undefined,
+      openGraph: {
+        title: seo?.title || "Mohit Tiles & Granites",
+        description: seo?.subtitle || undefined,
+        type: "website",
+      },
+    };
+  } catch {
+    return {};
+  }
+}
+
+export default async function HomePage() {
+  let store;
+  try {
+    store = await getDefaultStore();
+  } catch {
+    return (
+      <main style={{ padding: 80, textAlign: "center" }}>
+        <h1>Database not configured</h1>
+        <p style={{ marginTop: 16 }}>Set DATABASE_URL and run: npm run db:migrate && npm run db:seed</p>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    );
+  }
+
+  const [banners, blocks, logos, contact, categories, settings] = await Promise.all([
+    prisma.heroBanner.findMany({
+      where: { storeId: store.id, isActive: true },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.homepageBlock.findMany({ where: { storeId: store.id, isActive: true } }),
+    prisma.clientLogo.findMany({
+      where: { storeId: store.id, isActive: true },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.contactDetails.findUnique({ where: { storeId: store.id } }),
+    prisma.category.findMany({
+      where: { storeId: store.id, isActive: true },
+      orderBy: { sortOrder: "asc" },
+    }),
+    prisma.siteSetting.findMany({ where: { storeId: store.id } }),
+  ]);
+
+  const settingsMap = Object.fromEntries(settings.map((s) => [s.key, s.value]));
+  const block = (key: string) => blocks.find((b) => b.key === key);
+  const promo = banners.find((b) => b.type === "PROMO");
+  const heroes = banners.filter((b) => b.type === "HERO");
+  const sanitarySlugs = ["toilets", "faucets", "wash-basins"];
+  const tileSlugs = ["bathroom-tiles", "kitchen", "living-room"];
+  const sanitary = categories.filter((c) => sanitarySlugs.includes(c.slug));
+  const tiles = categories.filter((c) => tileSlugs.includes(c.slug));
+  const logoUrl = settingsMap.logo_url || "/images/logo.png";
+  const splashTitle = settingsMap.splash_title || "MOHIT TILES AND GRANITES";
+
+  return (
+    <>
+      <SplashScreen logoUrl={logoUrl} title={splashTitle} />
+      {promo ? <div className="top-promo-banner">{promo.title}</div> : null}
+      <Header logoUrl={logoUrl} hasPromo={!!promo} />
+      <main className={`main-content${promo ? "" : " no-promo"}`}>
+        <HeroSlider
+          slides={heroes.map((h) => ({
+            id: h.id,
+            title: h.title,
+            subtitle: h.subtitle,
+            imageUrl: h.imageUrl,
+          }))}
+        />
+
+        <Reveal style={{ background: "#fafafa" }}>
+          <h2 className="section-title">{block("sanitary_heading")?.title || "FIND SANITARYWARE BY CATEGORY"}</h2>
+          <div className="category-grid">
+            {sanitary.map((c) => (
+              <Link key={c.id} href={`/categories/${c.slug}`} className="category-card">
+                <div className="img-wrap">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.imageUrl || "/images/logo.png"} alt={c.name} loading="lazy" />
+                  <div className="overlay">
+                    <span className="shop-btn">SHOP NOW</span>
+                  </div>
+                </div>
+                <h3>{c.name}</h3>
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="section-title">{block("tiles_heading")?.title || "FIND TILES BY CATEGORY"}</h2>
+          <div className="category-grid">
+            {tiles.map((c) => (
+              <Link
+                key={c.id}
+                href={c.slug === "kitchen" ? "/gallery/kitchen" : `/categories/${c.slug === "bathroom-tiles" || c.slug === "living-room" ? "granites-marbles" : c.slug}`}
+                className="category-card"
+              >
+                <div className="img-wrap">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.imageUrl || "/images/logo.png"} alt={c.name} loading="lazy" />
+                  <div className="overlay">
+                    <span className="shop-btn">SHOP NOW</span>
+                  </div>
+                </div>
+                <h3>{c.name}</h3>
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            <h2 style={{ fontSize: 32 }}>{contact?.aboutTitle || block("about")?.title || "OUR 40-YEAR LEGACY"}</h2>
+            <div style={{ width: 60, height: 3, background: "#ffcc00", margin: "20px auto" }} />
+            <p style={{ fontSize: 18, lineHeight: 1.8, color: "#444" }}>
+              {contact?.legacyText || block("about")?.body}
+            </p>
+          </div>
+          <div className="brand-slider">
+            <div className="brand-track">
+              {[...logos, ...logos].map((logo, i) => (
+                <div className="brand-logo" key={`${logo.id}-${i}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={logo.imageUrl} alt={logo.name} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal style={{ background: "#f9f9f9" }}>
+          <h2>{block("contact_heading")?.title || "VISIT OUR SHOWROOM"}</h2>
+          {contact?.mapEmbedUrl ? (
+            <div className="map-container">
+              <iframe src={contact.mapEmbedUrl} title="Showroom map" loading="lazy" allowFullScreen />
+            </div>
+          ) : null}
+          <div style={{ marginTop: 20 }}>
+            <h1 style={{ fontSize: 28 }}>
+              Open {contact?.openDays || "Everyday"} • {contact?.openTime || "10:00"} – {contact?.closeTime || "20:00"}
+            </h1>
+          </div>
+        </Reveal>
+      </main>
+
+      {contact ? (
+        <ContactFloat
+          phone={contact.phonePrimary}
+          whatsapp={contact.whatsapp}
+          openTime={contact.openTime}
+          closeTime={contact.closeTime}
+        />
+      ) : null}
+    </>
   );
 }
