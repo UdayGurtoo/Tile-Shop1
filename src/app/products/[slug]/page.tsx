@@ -4,7 +4,6 @@ import { getProductBySlug } from "@/lib/products";
 import { getDefaultStore } from "@/lib/store";
 import { prisma } from "@/lib/prisma";
 import { formatInr, whatsappLink, siteUrl } from "@/lib/utils";
-import { Footer } from "@/components/public/Footer";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -111,13 +110,6 @@ export default async function ProductDetailPage({ params }: Props) {
           </a>
         </div>
       </div>
-      <Footer
-        businessName={contact?.businessName || store.name}
-        phone={contact?.phonePrimary || "+91 98111 22233"}
-        openTime={contact?.openTime || "10:00"}
-        closeTime={contact?.closeTime || "20:00"}
-        openDays={contact?.openDays || "Everyday"}
-      />
       <style>{`@media(max-width:768px){div[style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr !important}}`}</style>
     </>
   );

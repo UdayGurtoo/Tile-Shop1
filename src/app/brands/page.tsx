@@ -1,20 +1,16 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
-import { Footer } from "@/components/public/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Our Brands" };
 
 export default async function BrandsPage() {
   const store = await getDefaultStore();
-  const [brands, contact] = await Promise.all([
-    prisma.brand.findMany({
-      where: { storeId: store.id, isActive: true },
-      orderBy: { sortOrder: "asc" },
-    }),
-    prisma.contactDetails.findUnique({ where: { storeId: store.id } }),
-  ]);
+  const brands = await prisma.brand.findMany({
+    where: { storeId: store.id, isActive: true },
+    orderBy: { sortOrder: "asc" },
+  });
 
   return (
     <>
@@ -38,13 +34,6 @@ export default async function BrandsPage() {
           ))}
         </div>
       </div>
-      <Footer
-        businessName={contact?.businessName || store.name}
-        phone={contact?.phonePrimary || "+91 98111 22233"}
-        openTime={contact?.openTime || "10:00"}
-        closeTime={contact?.closeTime || "20:00"}
-        openDays={contact?.openDays || "Everyday"}
-      />
     </>
   );
 }

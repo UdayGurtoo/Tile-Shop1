@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
 import { listProducts } from "@/lib/products";
 import { ProductCard } from "@/components/public/ProductCard";
-import { Footer } from "@/components/public/Footer";
 import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }>; searchParams: Promise<{ page?: string; brand?: string; collection?: string }> };
@@ -134,13 +133,6 @@ export default async function CategoryPage({ params, searchParams }: Props) {
           </div>
         ) : null}
       </div>
-      <Footer
-        businessName={contact?.businessName || store.name}
-        phone={contact?.phonePrimary || "+91 98111 22233"}
-        openTime={contact?.openTime || "10:00"}
-        closeTime={contact?.closeTime || "20:00"}
-        openDays={contact?.openDays || "Everyday"}
-      />
     </>
   );
 }

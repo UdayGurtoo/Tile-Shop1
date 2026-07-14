@@ -2,7 +2,6 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
 import { ContactForm } from "@/components/public/ContactForm";
-import { Footer } from "@/components/public/Footer";
 import { formatTime12h } from "@/lib/utils";
 import type { Metadata } from "next";
 
@@ -45,13 +44,6 @@ export default async function ContactPage() {
         </div>
         <ContactForm />
       </div>
-      <Footer
-        businessName={contact?.businessName || store.name}
-        phone={contact?.phonePrimary || "+91 98111 22233"}
-        openTime={contact?.openTime || "10:00"}
-        closeTime={contact?.closeTime || "20:00"}
-        openDays={contact?.openDays || "Everyday"}
-      />
     </>
   );
 }

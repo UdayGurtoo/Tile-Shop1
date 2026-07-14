@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
 import { SplashScreen } from "@/components/public/SplashScreen";
 import { Header } from "@/components/public/Header";
-import { Footer } from "@/components/public/Footer";
 import { HeroSlider } from "@/components/public/HeroSlider";
 import { Reveal } from "@/components/public/Reveal";
 import { ContactFloat } from "@/components/public/ContactFloat";
@@ -202,13 +201,6 @@ export default async function HomePage() {
         </Reveal>
       </main>
 
-      <Footer
-        businessName={contact?.businessName || store.name}
-        phone={contact?.phonePrimary || "+91 98111 22233"}
-        openTime={contact?.openTime || "10:00"}
-        closeTime={contact?.closeTime || "20:00"}
-        openDays={contact?.openDays || "Everyday"}
-      />
 
       {contact ? (
         <ContactFloat

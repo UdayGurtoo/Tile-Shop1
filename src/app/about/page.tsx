@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { getDefaultStore } from "@/lib/store";
-import { Footer } from "@/components/public/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "About Us" };
@@ -18,29 +17,29 @@ export default async function AboutPage() {
     <>
       <header className="sub-header">
         <Link href="/" className="back-btn">
-          ← HOME
+          ← BACK TO HOME
         </Link>
-        <h3>ABOUT US</h3>
       </header>
-      <div className="hero-sub" style={{ background: "#111" }}>
-        <h1>{contact?.aboutTitle || "Our Legacy"}</h1>
+      <div className="hero-sub">
+        <h1>ABOUT US</h1>
       </div>
-      <div style={{ padding: "60px 6%", maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <p style={{ fontSize: 18, lineHeight: 1.8, color: "#444" }}>{contact?.legacyText}</p>
-        {contact?.aboutHtml ? (
-          <div style={{ marginTop: 24, textAlign: "left" }} dangerouslySetInnerHTML={{ __html: contact.aboutHtml }} />
-        ) : null}
-        <div className="brand-slider" style={{ marginTop: 40 }}>
-          <div className="brand-track">
-            {[...logos, ...logos].map((l, i) => (
-              <div className="brand-logo" key={`${l.id}-${i}`}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={l.imageUrl} alt={l.name} />
-              </div>
-            ))}
-          </div>
+      <div style={{ padding: "80px 6%", maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
+        <h2 style={{ fontSize: 36, marginBottom: 24 }}>{contact?.aboutTitle || "OUR 40-YEAR LEGACY"}</h2>
+        <p style={{ fontSize: 18, lineHeight: 1.8, color: "#444", marginBottom: 60 }}>{contact?.legacyText}</p>
+        <div style={{ textAlign: "left", background: "#f9f9f9", padding: 40, borderRadius: 12, marginBottom: 60, border: "1px solid #eee" }}>
+          <div dangerouslySetInnerHTML={{ __html: contact?.aboutHtml || "" }} />
         </div>
-        <div style={{ marginTop: 60, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 24 }}>
+        <h3 style={{ fontSize: 24, marginBottom: 30 }}>TRUSTED BY LEADING BUILDERS & ARCHITECTS</h3>
+        <div style={{ display: "flex", justifyContent: "center", gap: 40, flexWrap: "wrap", opacity: 0.7 }}>
+          {logos.map((l) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={l.id} src={l.imageUrl || "/images/mtg-logo.svg"} alt={l.name} style={{ height: 50, objectFit: "contain" }} />
+          ))}
+        </div>
+      </div>
+      <div style={{ background: "#f1f1f1", padding: "80px 6%", textAlign: "center" }}>
+        <h2 style={{ fontSize: 32, marginBottom: 40 }}>WHAT WE OFFER</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 30, maxWidth: 1200, margin: "0 auto" }}>
           {services.map((s) => (
             <div key={s.id} className="admin-card" style={{ textAlign: "left" }}>
               <h3 style={{ marginBottom: 8 }}>{s.title}</h3>
@@ -49,13 +48,6 @@ export default async function AboutPage() {
           ))}
         </div>
       </div>
-      <Footer
-        businessName={contact?.businessName || store.name}
-        phone={contact?.phonePrimary || "+91 98111 22233"}
-        openTime={contact?.openTime || "10:00"}
-        closeTime={contact?.closeTime || "20:00"}
-        openDays={contact?.openDays || "Everyday"}
-      />
     </>
   );
 }
