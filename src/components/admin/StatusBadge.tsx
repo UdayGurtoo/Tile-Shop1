@@ -38,11 +38,10 @@ export default function StatusBadge({ status, variant }: StatusBadgeProps) {
   );
 }
 
-export function BoolBadge({ value, trueLabel, falseLabel }: { value: boolean; trueLabel?: string; falseLabel?: string }) {
+export function BoolBadge({ value, trueLabel = "Yes", falseLabel = "No" }: { value: boolean; trueLabel?: string; falseLabel?: string }) {
   return (
-    <StatusBadge
-      status={value ? "published" : "draft"}
-      variant={value ? "success" : "default"}
-    />
+    <span className={`inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize ${value ? variants.success : variants.default}`}>
+      {value ? trueLabel : falseLabel}
+    </span>
   );
 }
